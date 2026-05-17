@@ -4,7 +4,7 @@
 
 import useStore from "store";
 import { useGameState } from "hooks";
-import { getKeyLabel } from "utils/keyboard";
+import { getKeyLabel, hasLongKeyLabel } from "utils/keyboard";
 import styles from "./keys.module.scss";
 
 const Keys = () => {
@@ -24,6 +24,7 @@ const Keys = () => {
         <div
           className={`
                       ${styles.key} ${gameState[0] >= i + 1 ? styles.correct : null} 
+                      ${hasLongKeyLabel(key) ? styles.longLabel : null}
                       ${keyLabels}
                       ${keyPressed && parseInt(gameState[0]) === i + 1 ? styles.down : null}`}
           key={i + score.toFixed()}

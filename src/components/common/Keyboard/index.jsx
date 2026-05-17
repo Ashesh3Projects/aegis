@@ -1,5 +1,5 @@
 import styles from './keyboard.module.scss'
-import { getKeyLabel } from 'utils/keyboard'
+import { getKeyLabel, hasLongKeyLabel } from 'utils/keyboard'
 
 const Keyboard = ({
 	keyboardLayout = [
@@ -15,7 +15,9 @@ const Keyboard = ({
 			{keyboardLayout.map((row, i) => (
 				<div className={styles.row} key={i}>
 					{row.map((el, j) => (
-						<div className={styles.key} key={j}>
+						<div
+							className={`${styles.key} ${hasLongKeyLabel(el) ? styles.longLabel : null}`}
+							key={j}>
 							{getKeyLabel(el)}
 						</div>
 					))}

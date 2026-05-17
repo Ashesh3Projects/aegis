@@ -23,4 +23,6 @@ const getKeyLabel = (key) => {
 	return key
 }
 
-export { deriveKeyboardLayout, getKeyLabel, normalizeKey }
+const hasLongKeyLabel = (key) => getKeyLabel(key)?.length > 1
+
+export { deriveKeyboardLayout, getKeyLabel, hasLongKeyLabel, normalizeKey }
