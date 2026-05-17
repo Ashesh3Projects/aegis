@@ -8,6 +8,9 @@
 	height: 3.5rem;
 	align-items: center;
 	justify-content: center;
+	box-sizing: border-box;
+	overflow: hidden;
+	padding: 0.25rem;
 	border: 1px solid rgba(255, 255, 255, 0.05);
 	background: linear-gradient(
 			180deg,
@@ -21,9 +24,11 @@
 	font-family: var(--key-font);
 	font-size: 1.125rem;
 	font-weight: 500;
-	text-transform: uppercase;
+	line-height: 1;
+	text-align: center;
 	transition: transform 0.1s, box-shadow 0.1s;
 	user-select: none;
+	white-space: nowrap;
 
 	&:first-child {
 		margin-right: 1rem;
@@ -47,5 +52,9 @@
 
 	&.labeled {
 		color: rgba(255, 255, 255, 1) !important;
+	}
+
+	&.longLabel {
+		font-size: 0.625rem;
 	}
 }

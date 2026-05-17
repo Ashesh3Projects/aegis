@@ -2,7 +2,7 @@ import useStore from "store";
 import { useState, useRef, useCallback } from "react";
 import { useOnClickOutside, useKeyPress, useEffectOnce } from "hooks";
 import { WrapSegmentedInputComponent } from "./shared";
-import { deriveKeyboardLayout } from "utils/keyboard";
+import { deriveKeyboardLayout, getKeyLabel, hasLongKeyLabel } from "utils/keyboard";
 import styles from "./keyboardOptions.module.scss";
 
 // Assets
@@ -33,8 +33,9 @@ const KeyboardOptions = () => {
   // Cancel key rebind when clicked outside of keymap area
   useOnClickOutside(gridRef, () => setKeyCanBeMapped(""));
 
-  useKeyPress((key) => {
+  useKeyPress((key, event) => {
     if (!keyCanBeMapped) return;
+    event?.preventDefault();
     if (key === "Escape") return setKeyCanBeMapped("");
 
     const row = keyCanBeMapped[0];
@@ -124,15 +125,15 @@ const KeyboardOptions = () => {
                         "--flash": keyHighlightOnChange,
                       }}
                       className={`
-												${styles.key} 
-                                                ${styles.highlight} 
-												${keyCanBeRemapped ? styles.rebind : null}
-												${el === "?" ? styles.missing : null}	
-
-										`}
+                        ${styles.key}
+                        ${styles.highlight}
+                        ${hasLongKeyLabel(el) ? styles.longLabel : null}
+                        ${keyCanBeRemapped ? styles.rebind : null}
+                        ${el === "?" ? styles.missing : null}
+                      `}
                       key={el === "?" ? col : el}
                     >
-                      <span>{keyCanBeRemapped ? "Press Key" : el}</span>
+                      <span>{keyCanBeRemapped ? "Press Key" : getKeyLabel(el)}</span>
                       {building && showKeyboardIconOverlay && (
                         <div
                           className={`
