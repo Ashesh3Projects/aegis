@@ -9,4 +9,18 @@ const deriveKeyboardLayout = (defaultLayouts, customLayout) => {
 	)
 }
 
-export { deriveKeyboardLayout }
+const normalizeKey = (key) => {
+	if (!key) return key
+
+	return key.length === 1 ? key.toLowerCase() : key
+}
+
+const getKeyLabel = (key) => {
+	if (key === ' ') return 'Spacebar'
+	if (key === 'CapsLock') return 'Caps Lock'
+	if (key?.length === 1) return key.toUpperCase()
+
+	return key
+}
+
+export { deriveKeyboardLayout, getKeyLabel, normalizeKey }

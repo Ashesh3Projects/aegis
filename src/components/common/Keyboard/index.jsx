@@ -1,4 +1,5 @@
 import styles from './keyboard.module.scss'
+import { getKeyLabel } from 'utils/keyboard'
 
 const Keyboard = ({
 	keyboardLayout = [
@@ -15,7 +16,7 @@ const Keyboard = ({
 				<div className={styles.row} key={i}>
 					{row.map((el, j) => (
 						<div className={styles.key} key={j}>
-							{el}
+							{getKeyLabel(el)}
 						</div>
 					))}
 				</div>

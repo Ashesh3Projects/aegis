@@ -1,4 +1,5 @@
 import { roundToTwoDecimals } from "utils/math";
+import { getKeyLabel } from "utils/keyboard";
 import styles from "./table.module.scss";
 
 const Table = ({ children }) => {
@@ -25,8 +26,8 @@ const TableItem = ({ value, label, unit = null, stretch = false, disabled = fals
           <>
             <img src={showBuilding.icon} alt={`${showBuilding.name} icon`} />
             <div className={styles.keys}>
-              <span>{showBuilding.shortcuts[0]}</span>
-              <span>{showBuilding.shortcuts[1]}</span>
+              <span>{getKeyLabel(showBuilding.shortcuts[0])}</span>
+              <span>{getKeyLabel(showBuilding.shortcuts[1])}</span>
             </div>
           </>
         )}

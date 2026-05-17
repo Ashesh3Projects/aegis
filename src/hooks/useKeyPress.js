@@ -2,15 +2,21 @@
  * @file Hook to handle keydown events
  */
 import { useState, useEffect } from 'react'
+import { normalizeKey } from 'utils/keyboard'
+
+const ALLOWED_NAMED_KEYS = ['CapsLock', 'Escape']
 
 const useKeyPress = (callback) => {
 	const [keyPressed, setKeyPressed] = useState()
 
 	useEffect(() => {
 		const handleKeyDown = ({ key }) => {
-			if (keyPressed !== key && key.length === 1) {
-				setKeyPressed(key)
-				callback && callback(key.toLowerCase())
+			const normalizedKey = normalizeKey(key)
+			const isAllowedKey = key.length === 1 || ALLOWED_NAMED_KEYS.includes(key)
+
+			if (keyPressed !== normalizedKey && isAllowedKey) {
+				setKeyPressed(normalizedKey)
+				callback && callback(normalizedKey)
 			}
 		}
 		const handleKeyUp = () => {
@@ -23,7 +29,7 @@ const useKeyPress = (callback) => {
 			window.removeEventListener('keyup', handleKeyUp)
 		}
 	})
-	return keyPressed?.toLowerCase()
+	return keyPressed
 }
 
 export default useKeyPress

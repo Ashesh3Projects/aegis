@@ -4,6 +4,7 @@
 
 import useStore from "store";
 import { useGameState } from "hooks";
+import { getKeyLabel } from "utils/keyboard";
 import styles from "./keys.module.scss";
 
 const Keys = () => {
@@ -27,7 +28,7 @@ const Keys = () => {
                       ${keyPressed && parseInt(gameState[0]) === i + 1 ? styles.down : null}`}
           key={i + score.toFixed()}
         >
-          {key}
+          {getKeyLabel(key)}
         </div>
       ))}
     </div>

@@ -2,7 +2,7 @@ import useStore from "store";
 import { useState, useRef, useCallback } from "react";
 import { useOnClickOutside, useKeyPress, useEffectOnce } from "hooks";
 import { WrapSegmentedInputComponent } from "./shared";
-import { deriveKeyboardLayout } from "utils/keyboard";
+import { deriveKeyboardLayout, getKeyLabel } from "utils/keyboard";
 import styles from "./keyboardOptions.module.scss";
 
 // Assets
@@ -132,7 +132,7 @@ const KeyboardOptions = () => {
 										`}
                       key={el === "?" ? col : el}
                     >
-                      <span>{keyCanBeRemapped ? "Press Key" : el}</span>
+                      <span>{keyCanBeRemapped ? "Press Key" : getKeyLabel(el)}</span>
                       {building && showKeyboardIconOverlay && (
                         <div
                           className={`
